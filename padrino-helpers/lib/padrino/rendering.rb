@@ -301,7 +301,7 @@ module Padrino
 
       def glob_templates(views_path, template_path)
         parts = []
-        parts << views_path
+        parts << views_path if views_path
         if respond_to?(:request) && request.respond_to?(:controller) && request.controller && Pathname.new(template_path).relative?
           parts << "{,#{request.controller}}"
         end

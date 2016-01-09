@@ -110,12 +110,12 @@ module Padrino
             model_name = I18n.t(:name, :default => Inflections.humanize(object_name), :scope => [:models, object_name], :count => 1)
             I18n.t :header, :count => count, :model => model_name, :locale => options[:locale], :scope => [:models, :errors, :template]
           end
-          content_tag(options[:header_tag] || :h2, header_message)
+          content_tag(options[:header_tag] || :h2, header_message) unless header_message.empty?
         end
 
         def error_body_tag(options)
           body_message = options[:message] || I18n.t(:body, :locale => options[:locale], :scope => [:models, :errors, :template])
-          content_tag(:p, body_message)
+          content_tag(:p, body_message) unless body_message.empty?
         end
 
         def error_html_attributes(options)
