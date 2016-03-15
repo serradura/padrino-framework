@@ -17,8 +17,9 @@ module Padrino
         #   tag_icon(:edit, :list)
         #
         def tag_icon(icon, tag = nil)
-          content = content_tag(:i, '', :class=> "fa fa-#{icon}")
-          content << " #{tag}"
+          content_tag(:i, "", :class => "fa fa-#{icon}").tap do |content|
+            content << (tag.is_a?(ActiveSupport::SafeBuffer) ? tag : " #{tag}") if tag
+          end
         end
 
         ##
